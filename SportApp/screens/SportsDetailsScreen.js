@@ -1,32 +1,20 @@
 import * as React from 'react';
-import {
-  Image,
-  Text,
-  View,
-  Button,
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-} from 'react-native';
-import axios from 'axios';
+import {Image, Text, View, StyleSheet} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 function SportDetailsScreen() {
   const route = useRoute();
-  // console.log(route.params['details']);
   const sportsDetails = route.params['details'];
 
   return (
     <View style={{flex: 1, padding: 24}}>
       <Text>
-        {sportsDetails.strSport}
-        {'\n'}
         <Image
           style={styles.image}
           source={{uri: `${sportsDetails.strSportThumb}`}}
         />
         {'\n'}
         {'\n'}
-        {'\n'}
+        <Text style={styles.text}>- {sportsDetails.strSport}</Text>
         {'\n'}
         {sportsDetails.strSportDescription}
       </Text>
@@ -40,7 +28,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     resizeMode: 'contain',
     height: 100,
-    width: 250,
+    width: 320,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'black',
   },
 });
 

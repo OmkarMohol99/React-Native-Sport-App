@@ -1,45 +1,20 @@
 import * as React from 'react';
 import {
-  Image,
   Text,
   View,
-  Button,
   ActivityIndicator,
   FlatList,
   StyleSheet,
 } from 'react-native';
-import axios from 'axios';
+import {getLeagueData} from '../database/Handlers';
 
 function LeagueScreen({navigation}) {
-  const [isLoading, setLoading] = React.useState(true);
+  const [isLoading, setLoading] = React.useState(false);
   const [league, setLeague] = React.useState([]);
-
-  const getLeague = async () => {
-    try {
-      const response = await fetch(
-        'https://www.thesportsdb.com/api/v1/json/2/all_leagues.php',
-      );
-      const json = await response.json();
-      setLeague(json.leagues);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  //   const getLeague = () => {
-  //     axios({
-  //       url: 'https://www.thesportsdb.com/api/v1/json/2/all_leagues.php',
-  //       method: 'GET',
-  //     }).then(res => {
-  //       var response = res.data;
-  //       setLeague(response.leagues);
-  //     });
-  //   };
+  // console.log(league);
 
   React.useEffect(() => {
-    getLeague();
+    getLeagueData(setLeague, setLoading);
   }, []);
 
   return (
@@ -48,7 +23,7 @@ function LeagueScreen({navigation}) {
         <ActivityIndicator />
       ) : (
         <FlatList
-          data={league}
+          data={league.leagues}
           keyExtractor={({id}, index) => id}
           renderItem={({item}) => (
             <Text

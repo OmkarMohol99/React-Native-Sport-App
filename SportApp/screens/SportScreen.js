@@ -3,42 +3,17 @@ import {
   Image,
   Text,
   View,
-  Button,
   ActivityIndicator,
   FlatList,
   StyleSheet,
 } from 'react-native';
-import axios from 'axios';
+import {getSportsData} from '../database/Handlers';
 function SportScreen({navigation}) {
-  const [isLoading, setLoading] = React.useState(true);
+  const [isLoading, setLoading] = React.useState(false);
   const [sport, setSport] = React.useState([]);
 
-  const getSport = async () => {
-    try {
-      const response = await fetch(
-        'https://www.thesportsdb.com/api/v1/json/2/all_sports.php',
-      );
-      const json = await response.json();
-      setSport(json.sports);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  //   const getSport = () => {
-  //     axios({
-  //       url: 'https://www.thesportsdb.com/api/v1/json/2/all_sports.php',
-  //       method: 'GET',
-  //     }).then(res => {
-  //       var response = res.data;
-  //       setSport(response.sports);
-  //     });
-  //   };
-
   React.useEffect(() => {
-    getSport();
+    getSportsData(setSport, setLoading);
   }, []);
 
   return (
@@ -47,18 +22,33 @@ function SportScreen({navigation}) {
         <ActivityIndicator />
       ) : (
         <FlatList
-          data={sport}
+          data={sport.sports}
           keyExtractor={({id}, index) => id}
           renderItem={({item}) => (
             <Text
+              style={styles.text}
               onPress={() =>
-                navigation.navigate('SportsDetails', {details: item})
+                navigation.navigate('Sports Details', {details: item})
               }>
+              - {item.strSport}
+              {'\n'}
+              {'\n'}
+              {'\n'}
+              {'\n'}
+              {'\n'}
+              {'\n'}
+              {'\n'}
               <Image
                 style={styles.image}
                 source={{uri: `${item.strSportThumb}`}}
               />
-              {item.strSport}
+              {'\n'}
+              {'\n'}
+              {'\n'}
+              {'\n'}
+              {'\n'}
+              {'\n'}
+              {'\n'}
             </Text>
           )}
         />
@@ -72,8 +62,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     resizeMode: 'contain',
-    height: 100,
-    width: 250,
+    height: 200,
+    width: 330,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'black',
   },
 });
 
