@@ -18,7 +18,8 @@ function LeagueScreen({navigation}) {
   }, []);
 
   return (
-    <View style={{flex: 1, padding: 24}}>
+    <View
+      style={{flex: 1, padding: 20, paddingTop: -20, backgroundColor: 'white'}}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -26,15 +27,18 @@ function LeagueScreen({navigation}) {
           data={league.leagues}
           keyExtractor={({id}, index) => id}
           renderItem={({item}) => (
-            <Text
-              style={styles.text}
-              onPress={() => navigation.navigate('Teams')}>
-              <Text style={styles.titleText}>LEAGUE NAME : </Text>
-              {item.strLeague}
+            <Text style={styles.border}>
               {'\n'}
-              <Text style={styles.titleText}>ALTERNATE LEAGUE NAME : </Text>
-              {item.strLeagueAlternate}
-              {'\n'}
+              <Text
+                style={styles.text}
+                onPress={() => navigation.navigate('Teams', {teams: item})}>
+                <Text style={styles.titleText}>LEAGUE NAME : </Text>
+                {item.strLeague}
+                {'\n'}
+                <Text style={styles.titleText}>ALTERNATE LEAGUE NAME : </Text>
+                {item.strLeagueAlternate}
+                {'\n'}
+              </Text>
             </Text>
           )}
         />
@@ -57,6 +61,13 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     letterSpacing: 0.25,
     color: 'purple',
+    padding: 10,
+  },
+
+  border: {
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: 'purple',
   },
 });
 

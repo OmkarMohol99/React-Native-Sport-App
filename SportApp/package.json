@@ -20,6 +20,7 @@
     "axios": "^1.2.1",
     "link": "^1.5.1",
     "nachos-ui": "^0.2.0-beta.1",
+    "qs": "^6.11.0",
     "react": "18.1.0",
     "react-i18next": "^12.1.1",
     "react-native": "^0.70.6",

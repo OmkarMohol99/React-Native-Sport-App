@@ -14,7 +14,10 @@ function SportDetailsScreen() {
         />
         {'\n'}
         {'\n'}
-        <Text style={styles.text}>- {sportsDetails.strSport}</Text>
+        {'\n'}
+        {'\n'}
+        <Text style={styles.text}> {sportsDetails.strSport}</Text>
+        {'\n'}
         {'\n'}
         {sportsDetails.strSportDescription}
       </Text>
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     resizeMode: 'contain',
     height: 100,
-    width: 320,
+    width: 330,
   },
   text: {
     fontSize: 16,

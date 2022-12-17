@@ -17,7 +17,7 @@ function SportScreen({navigation}) {
   }, []);
 
   return (
-    <View style={{flex: 1, padding: 24}}>
+    <View style={{flex: 1, padding: 20, paddingTop: -20}}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
